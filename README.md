@@ -1,5 +1,5 @@
 # Facebook
-_this is actually facebook developed by META! :)_
+_this is facebook developed by META! :)_
 
 
 ### TODO
