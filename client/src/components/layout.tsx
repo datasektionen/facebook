@@ -1,5 +1,3 @@
-import styles from '../styles/style.module.css'
-
 export default function RootLayout({
   children,
 }: {
@@ -7,7 +5,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <main className={styles.global}>{children}</main>
+      {children}
     </>
   )
 }

@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 
 import RootLayout from '../components/layout';
-import styles from '../styles/style.module.css'
+import styles from '../styles/landing.module.css'
 
 export default function Landing() {
   const router = useRouter()
