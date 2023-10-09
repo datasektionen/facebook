@@ -1,6 +1,5 @@
 # Facebook
-_this is facebook developed by META! :)_
-
+because it's *META*... you know?
 
 ### TODO
 - bygg hela hemisdan ;-;
