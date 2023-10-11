@@ -18,5 +18,8 @@ func main() {
 	api := r.Group("/api")
 	server.InitRoutes(api)
 
+	websocket := r.Group("/websocket")
+	server.InitWebsocket(websocket)
+
 	r.Run(fmt.Sprintf(":%d", 5001))
 }
