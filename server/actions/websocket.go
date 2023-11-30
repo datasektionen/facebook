@@ -26,20 +26,22 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-var clients = make(map[*websocket.Conn]bool)
+var clients = make(map[string][]*websocket.Conn)
 
 func SendWebSocketMessageToClients(c *gin.Context) {
     // Broadcast the message to all connected clients
     fmt.Println("SendWebSocketMessageToClients called")
 
-    for client := range clients {
-        fmt.Println("Sending message to client")
-        err := client.WriteMessage(websocket.TextMessage, []byte("this is from an API!"))
-        if err != nil {
-            fmt.Println("Error sending message:", err)
-            // Handle the error, e.g., remove the client from the list
-            delete(clients, client)
-        }
+    for socket := range clients {
+		for _, conn := range clients[socket] {
+			fmt.Println("Sending message to client")
+			err := conn.WriteMessage(websocket.TextMessage, []byte("this is from an API!"))
+			if err != nil {
+				fmt.Println("Error sending message:", err)
+				// Handle the error, e.g., remove the client from the list
+				clients[socket] = append(clients[socket][:0], clients[socket][1:]...)
+			}
+		}
     }
 }
 
@@ -53,15 +55,16 @@ func SendWebSocketDataToClients(c *gin.Context) {
 		return
 	}
 
-    for client := range clients {
-        fmt.Println("Sending message to client")
-        // err := client.WriteMessage(websocket.TextMessage, []byte("this is from an API!"))
-        err := client.WriteMessage(websocket.TextMessage, data_marshal)
-        if err != nil {
-            fmt.Println("Error sending message:", err)
-            // Handle the error, e.g., remove the client from the list
-            delete(clients, client)
-        }
+    for socket := range clients {
+		for _, conn := range clients[socket] {
+			fmt.Println("Sending message to client")
+			err := conn.WriteMessage(websocket.TextMessage, data_marshal)
+			if err != nil {
+				fmt.Println("Error sending message:", err)
+				// Handle the error, e.g., remove the client from the list
+				clients[socket] = append(clients[socket][:0], clients[socket][1:]...)
+			}
+		}
     }
 }
 
@@ -132,15 +135,15 @@ func GetData(quary string) CombinedData{
 }
 
 func SendWebsocket(c *gin.Context) {
-
 	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
 		fmt.Print("upgrade failed: ", err)
 		return
 	}
 
-
-	data_marshal, err := json.Marshal(GetData("sokior"))
+	code := c.Param("code")
+	
+	data_marshal, err := json.Marshal(GetData(code))
 	if err != nil {
 		fmt.Println("Error marshaling to JSON:", err)
 		return
@@ -148,10 +151,8 @@ func SendWebsocket(c *gin.Context) {
 	err = conn.WriteMessage(websocket.TextMessage, data_marshal)
 	if err != nil {
 		fmt.Println("Error sending message:", err)
-		// Handle the error, e.g., remove the client from the list
-		delete(clients, conn)
+		return
 	}
 
-	clients[conn] = true
-
+	clients[code] = append(clients[code], conn)
 }
