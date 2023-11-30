@@ -63,8 +63,8 @@ func CreateSchedule(c *gin.Context) {
     fmt.Println(string(jsonString))
 
     data_entry := &database.SCHEDULE{
-        Key: "sokior3", 
-        Overseers: "Gonzo Gonzalezz", 
+        Key: "thisisakey", 
+        Overseers: "name name2", 
         Comments: "Detta är en väldigt seriös kommentar som bör läsas",
         ChecklistJSON: string(jsonString),
     }
