@@ -20,6 +20,7 @@ func InitRoutes(r *gin.RouterGroup) {
 	r.GET("/create_schedule", actions.CreateSchedule)
 
 	r.PUT("/update_schedule", actions.UpdateSchedule)
+	r.GET("/test", actions.SendWebSocketDataToClients)
 }
 
 func InitWebsocket(r *gin.RouterGroup){

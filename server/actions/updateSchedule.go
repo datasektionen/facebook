@@ -9,7 +9,9 @@ import (
 
 func UpdateSchedule(c *gin.Context) {
 
-	data := SendDataSocketToClients(c.Query("key"))
+	data := GetData(c.Query("key"))
+
+
 
 
     c.JSON(200,gin.H{

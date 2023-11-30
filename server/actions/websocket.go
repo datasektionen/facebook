@@ -41,6 +41,28 @@ func SendWebSocketMessageToClients(c *gin.Context) {
     }
 }
 
+func SendWebSocketDataToClients(c *gin.Context) {
+    // Broadcast the message to all connected clients
+    fmt.Println("SendWebSocketMessageToClients called")
+
+	data_marshal, err := json.Marshal(GetData("sokior"))
+	if err != nil {
+		fmt.Println("Error marshaling to JSON:", err)
+		return
+	}
+
+    for client := range clients {
+        fmt.Println("Sending message to client")
+        // err := client.WriteMessage(websocket.TextMessage, []byte("this is from an API!"))
+        err := client.WriteMessage(websocket.TextMessage, data_marshal)
+        if err != nil {
+            fmt.Println("Error sending message:", err)
+            // Handle the error, e.g., remove the client from the list
+            delete(clients, client)
+        }
+    }
+}
+
 type SCHEDULE_new struct {
 	gorm.Model
 	Key          string
@@ -54,7 +76,7 @@ type CombinedData struct {
 	ParsedChecklistItems []database.ChecklistItem `json:"parsedChecklistItems"`
 }
 
-func SendDataSocketToClients(quary string) CombinedData{
+func GetData(quary string) CombinedData{
 
 
 	database.InitDB()
@@ -116,6 +138,19 @@ func SendWebsocket(c *gin.Context) {
 	if err != nil {
 		fmt.Print("upgrade failed: ", err)
 		return
+	}
+
+
+	data_marshal, err := json.Marshal(GetData("sokior"))
+	if err != nil {
+		fmt.Println("Error marshaling to JSON:", err)
+		return
+	}
+	err = conn.WriteMessage(websocket.TextMessage, data_marshal)
+	if err != nil {
+		fmt.Println("Error sending message:", err)
+		// Handle the error, e.g., remove the client from the list
+		delete(clients, conn)
 	}
 
 	clients[conn] = true
