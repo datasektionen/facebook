@@ -17,9 +17,7 @@ func InitRoutes(r *gin.RouterGroup) {
 	r.GET("/trigger", actions.CreateChecklist)
 	r.GET("/send_websocket", actions.SendWebSocketMessageToClients)
 	// r.GET("/create_checklist", actions.CreateChecklist)  // This is only for updating/ recreating the entire checklist. This should not be open by default for obvoius reasons 
-	r.GET("/get_checklist", actions.GetChecklist)
 	r.GET("/create_schedule", actions.CreateSchedule)
-	r.GET("/get_schedule", actions.GetSchedule)
 
 	r.PUT("/update_schedule", actions.UpdateSchedule)
 }
