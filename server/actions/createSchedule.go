@@ -1,10 +1,12 @@
 package actions
 
 import (
+	"encoding/json"
+	"fmt"
+
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-    "encoding/json"
-    "fmt"
 
 	database "github.com/datasektionen/facebook/server/db"
 )
@@ -15,8 +17,6 @@ type ChecklistJSON struct {
 }
 
 func CreateSchedule(c *gin.Context) {
-
-	database.InitDB()
     db := database.GetDB()
     
     // get data from checklist
@@ -63,19 +63,22 @@ func CreateSchedule(c *gin.Context) {
     fmt.Println(string(jsonString))
 
     data_entry := &database.SCHEDULE{
-        Key: "thisisakey", 
+        Key: "sokior", 
         Overseers: "name name2", 
         Comments: "Detta är en väldigt seriös kommentar som bör läsas",
         ChecklistJSON: string(jsonString),
     }
 
-    err = db.Create(&data_entry).Error
-    if err != nil {
-        c.JSON(500, gin.H{
-            "error": err,
-        })
-        return
-    }
+	db.Transaction(func(tx *gorm.DB) error {
+		err := tx.Create(&data_entry).Error
+		if err != nil {
+			c.JSON(500, gin.H{
+				"error": err,
+			})
+			return err
+		}
+		return nil
+	})
 
     c.JSON(200, gin.H{
 		"message": "Schedule items inserted successfully",

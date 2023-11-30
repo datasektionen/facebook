@@ -53,7 +53,8 @@ export default function WebSocketComponent({ code }: { code: string }) {
         };
 
         socket.onmessage = (event) => {
-            console.log('Received message from server:', event.data);
+            const data = JSON.parse(event.data);
+            console.log('Received message from server:', data);
         };
 
         socket.onclose = (event) => {
@@ -89,7 +90,7 @@ export default function WebSocketComponent({ code }: { code: string }) {
         };
 
         try {
-            await fetch(`http://localhost:5001/task`, {
+            await fetch(`http://localhost:5001/update_schedule?key=sokior`, {
                 method: 'PUT',
                 body: JSON.stringify(body),
             });

@@ -6,10 +6,14 @@ import (
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
+	database "github.com/datasektionen/facebook/server/db"
+
 	server "github.com/datasektionen/facebook/server"
 )
 
 func main() {
+	database.InitDB();
+
 	r := gin.Default()
 
 	r.Use(static.Serve("/", static.LocalFile("./dist", true)))

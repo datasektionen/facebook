@@ -1,16 +1,18 @@
 package actions
 
 import (
-	"net/http"
 	"fmt"
-	"gorm.io/gorm"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 
 	"github.com/gorilla/websocket"
 
-	"gorm.io/gorm/clause"
 	"encoding/json"
+
 	database "github.com/datasektionen/facebook/server/db"
+	"gorm.io/gorm/clause"
 )
 
 var upgrader = websocket.Upgrader{
@@ -77,9 +79,6 @@ type CombinedData struct {
 }
 
 func GetData(quary string) CombinedData{
-
-
-	database.InitDB()
     db := database.GetDB()
 
 	var schedules []database.SCHEDULE

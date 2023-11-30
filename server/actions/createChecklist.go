@@ -1,8 +1,10 @@
 package actions
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 
 	"encoding/json"
 
@@ -11,7 +13,6 @@ import (
 
 
 func CreateChecklist(c *gin.Context) {
-	database.InitDB()
 	db := database.GetDB()
 
 	fmt.Println("CREATE CHECKLIST CODE RUNNING!")
@@ -401,14 +402,16 @@ func CreateChecklist(c *gin.Context) {
 			ChecklistItem: checklistStringLiteral,
 		}
 
-
-		err := db.Create(&data_entry).Error
-		if err != nil {
-			c.JSON(500, gin.H{
-				"error": err,
-			})
-			return
-		}
+		db.Transaction(func(tx *gorm.DB) error {
+			err := tx.Create(&data_entry).Error
+			if err != nil {
+				c.JSON(500, gin.H{
+					"error": err,
+				})
+				return err
+			}
+			return nil
+		})
 	}
 
 	c.JSON(200, gin.H{
