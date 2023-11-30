@@ -5,20 +5,30 @@ import (
 )
 
 type SCHEDULE struct {
+	gorm.Model
 	Key        			string            
 	Overseers	  		string		
 	Comments    		string
-	Checklist			int
+	ChecklistJSON		string
 }
 
 type CHECKLIST struct {
-	ChecklistID 		int
-	Prompts []PROMPTS `gorm:"foreignKey:ChecklistID"`
+	gorm.Model
+	ChecklistItem    string   		`json:"ChecklistItem"`
 }
 
-type PROMPTS struct {
-	gorm.Model
-	Category			string
-	Prompt				string
-	Value				bool
+type ChecklistItem struct {
+	Category       string          `json:"category"`
+	SwedishValues  []SwedishValue  `json:"swedish_values"`
+	EnglishValues  []EnglishValue  `json:"english_values"`
+}
+
+type SwedishValue struct {
+	ChecklistItemID string   `json:"ChecklistItemID"`
+	Prompt          string   `json:"prompt"`
+}
+
+type EnglishValue struct {
+	ChecklistItemID string   `json:"ChecklistItemID"`
+	Prompt          string   `json:"prompt"`
 }

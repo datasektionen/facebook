@@ -25,7 +25,6 @@ var clients = make(map[*websocket.Conn]bool)
 func SendWebSocketMessageToClients(c *gin.Context) {
     // Broadcast the message to all connected clients
     fmt.Println("SendWebSocketMessageToClients called")
-    fmt.Println(clients)
 
     for client := range clients {
         fmt.Println("Sending message to client")
@@ -48,10 +47,4 @@ func SendWebsocket(c *gin.Context) {
 
 	clients[conn] = true
 
-	fmt.Println(conn)
-
-	message := "Hello from the server!" // Your text message
-	if err := conn.WriteMessage(websocket.TextMessage, []byte(message)); err != nil {
-		return
-	}
 }

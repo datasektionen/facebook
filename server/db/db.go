@@ -20,7 +20,11 @@ func InitDB() {
 		os.Exit(5)
 	}
 
-	db.AutoMigrate(&SCHEDULE{})
+	// db.AutoMigrate(&SCHEDULE{})
+	// db.AutoMigrate(&CHECKLIST{})
+
+	db.AutoMigrate(&CHECKLIST{}, &SCHEDULE{})
+
 }
 
 func GetDB() *gorm.DB {
