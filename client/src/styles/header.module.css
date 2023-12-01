@@ -1,0 +1,23 @@
+.header {
+    position: absolute;
+    width: 100vw;
+    height: 100px;
+}
+
+.header button {
+    width: 100vw;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.header h1 {
+    display:inline
+}
+
+.img {
+    height: 50px;
+    width: 50px;
+    display: inline;
+    padding-right: 15px;
+}

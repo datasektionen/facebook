@@ -1,3 +1,5 @@
+import Header from "./header"
+
 export default function RootLayout({
   children,
 }: {
@@ -5,6 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <>
+      <Header />
       {children}
     </>
   )
