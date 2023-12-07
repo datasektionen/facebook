@@ -1,31 +1,39 @@
 .main{
-    width: 100vw;
-    height: 100vh;
-    background-color: #e83d84;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e83d84;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  background-color: #c81d92;
+  border-style: solid;
 }
 
 .fun_button {
-    width: 200px;
-    height: 50px;
-    background-color: #c21717; /* Change to your desired background color */
-    border: none;
-    border-radius: 25px; /* Increase border-radius for a more rounded look */
-    color: #fff; /* Text color */
-    font-size: 18px; /* Adjust the font size */
-    font-weight: bold; /* Make the text bold */
-    text-transform: uppercase; /* Convert text to uppercase */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  width: 200px;
+  height: 50px;
+  background-color: #c21717; /* Change to your desired background color */
+  border: none;
+  border-radius: 25px; /* Increase border-radius for a more rounded look */
+  color: #fff; /* Text color */
+  font-size: 18px; /* Adjust the font size */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Convert text to uppercase */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .fun_button:hover {
-  background-color: #ff4242; /* Change to your desired hover background color */
-  transform: scale(1.05); /* Add a slight scaling effect on hover */
+background-color: #ff4242; /* Change to your desired hover background color */
+transform: scale(1.05); /* Add a slight scaling effect on hover */
 }
-  
