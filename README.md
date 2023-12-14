@@ -5,7 +5,7 @@ because it's *META*... you know?
 - bygg hela hemisdan ;-;
 - Lägg till städschema
 
-### DOCS (ish)
+### DOCS (ish) (gammal)
 
 Sidan är just nu väldigt mycket i teststadiet men här är några pointers över struktur mm:
 
