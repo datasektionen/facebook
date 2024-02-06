@@ -1,7 +1,7 @@
 .main{
   width: 100vw;
   height: 100vh;
-  background-color: #e83d84;
+  background-color: var(--cerise-regular);
   display: flex;
   justify-content: center;
   align-items: center;
