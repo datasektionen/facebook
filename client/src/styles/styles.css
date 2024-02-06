@@ -6,8 +6,10 @@
     transition: all ease-in-out 100ms;
 }
 
-button {
-    &:active {
-      transform: scale(0.95);
-    }
+button:hover {
+  transform: scale(1.05); /* Add a slight scaling effect on hover */
+}
+
+button:active {
+  transform: scale(0.85); /* Add a slight scaling effect on click */
 }

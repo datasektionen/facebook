@@ -22,7 +22,7 @@ export default function Landing() {
             <ul>{listItems}</ul>
             <br/>
             <button className={styles.fun_button} onClick={()=>router.push('/stadschema')}>
-                Click me!
+              Måndagsstäd!
             </button>
         </div>
     </RootLayout>

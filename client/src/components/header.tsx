@@ -8,10 +8,10 @@ export default function Header() {
 
     return (
         <header className={styles.header}>
-            <button onClick={() => router.push("/stadschema")}>
+            <div className={styles.headerDiv} onClick={() => router.push("/stadschema")}>
                 <img className={styles.img} src={logo.src} />
                 <h1>METADORERNA</h1>
-            </button>
+            </div>
         </header>
     );
 }

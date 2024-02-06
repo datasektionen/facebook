@@ -44,7 +44,6 @@
   
   .login_container button:hover {
     background-color: #0056b3; /* Hover background color */
-    transform: scale(1.05); /* Slight scaling on hover */
   }
   
   /* Optional: Add box shadow for a cool effect */

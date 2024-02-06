@@ -31,9 +31,56 @@
   align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  overflow: visible;
 }
 
 .fun_button:hover {
-background-color: #ff4242; /* Change to your desired hover background color */
-transform: scale(1.05); /* Add a slight scaling effect on hover */
+  background-color: #ff4242; /* Change to your desired hover background color */
+  --border-scale: 1.1;
+}
+
+.fun_button:active {
+  --border-scale: 1;
+}
+
+.fun_button:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: solid;
+  border-radius: 25px;
+  /*min-height: 2vh;*/
+  mask: conic-gradient(
+    transparent 0deg 7deg,
+    black 7deg 21deg,
+    transparent 21deg 35deg,
+    black 35deg 49deg,
+    transparent 49deg 63deg,
+    black 63deg 77deg,
+    transparent 77deg 89deg,
+    black 89deg 103deg,
+    transparent 103deg 117deg,
+    black 117deg 131deg,
+    transparent 131deg 145deg,
+    black 145deg 159deg,
+    transparent 159deg 173deg,
+    black 173deg 187deg,
+    transparent 187deg 199deg,
+    black 199deg 213deg,
+    transparent 213deg 227deg,
+    black 227deg 241deg,
+    transparent 241deg 255deg,
+    black 255deg 269deg,
+    transparent 269deg 283deg,
+    black 283deg 297deg,
+    transparent 297deg 311deg,
+    black 311deg 325deg,
+    transparent 325deg 339deg,
+    black 339deg 353deg,
+    transparent 353deg
+  );
+  transform: scale(calc(var(--border-scale, 0) * 1));
+  transition: transform 0.125s;
+  
+  /*z-index: -1;*/
 }
