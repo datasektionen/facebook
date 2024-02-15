@@ -19,5 +19,6 @@ Sidan är just nu väldigt mycket i teststadiet men här är några pointers öv
 
 - För att köra, använd ```go run .``` i mappen ```/```
 - Servern kräver en posgresql databas. Anslutningslänken är: ```postgres://facebook_user:facebook@localhost:5432/facebook``` sätt upp en databas runt dessa kriterier borde det lösa sig ;-;
+- Skapa en .env fil och lägg till parametern POSTGRES_CONNECTION=<connection string> (exempelvis den ovan)
 - Självaste strukturen på databasen är väldigt mycket "in progress" och det schema som är definierat just nu är ingen bra lösning :)
 - Alla actions som finns i servern är för testande, allstå finns inget riktigt backend API ännu 
