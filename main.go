@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 
 	database "github.com/datasektionen/facebook/server/db"
 
@@ -12,7 +14,13 @@ import (
 )
 
 func main() {
-	database.InitDB();
+	// Load environment variables from .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file:", err)
+	}
+
+	database.InitDB()
 
 	r := gin.Default()
 
