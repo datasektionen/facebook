@@ -1,20 +1,21 @@
 package actions
 
 import (
-	"github.com/gin-gonic/gin"
-	// "fmt"
-	// "encoding/json"
+	"fmt"
 
+	"github.com/gin-gonic/gin"
+	// "encoding/json"
 )
 
 func UpdateSchedule(c *gin.Context) {
 
-	data := GetData(c.Query("key"))
+	data := c.Query("key")
 
+	fmt.Println("THIS IS COOL DATA: ", data)
 
+	SendWebSocketDataToClients(c)
 
-
-    c.JSON(200,gin.H{
-        "data": data,
-    })
+	c.JSON(200, gin.H{
+		"data": data,
+	})
 }

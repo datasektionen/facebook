@@ -27,6 +27,9 @@ func main() {
 	r.Use(static.Serve("/", static.LocalFile("./dist", true)))
 	r.Static("/public", "./public")
 
+	// Add CORS middleware
+	r.Use(corsMiddleware())
+
 	api := r.Group("/api")
 	server.InitRoutes(api)
 
@@ -34,4 +37,19 @@ func main() {
 	server.InitWebsocket(websocket)
 
 	r.Run(fmt.Sprintf(":%d", 5001))
+}
+
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }
