@@ -17,6 +17,10 @@
     --metador-yellow: #edc80f;
 }
 
+body{
+  overflow-y: scroll;
+}
+
 button:hover {
   transform: scale(1.05); /* Add a slight scaling effect on hover */
 }

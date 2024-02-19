@@ -83,7 +83,7 @@ type CombinedData struct {
 	ParsedChecklistItems []database.ChecklistItem `json:"parsedChecklistItems"`
 }
 
-func GetData(quary string) CombinedData {
+func GetData(query string) CombinedData {
 	db := database.GetDB()
 
 	var schedules []database.SCHEDULE
@@ -93,11 +93,11 @@ func GetData(quary string) CombinedData {
 
 	var scheduleItems []SCHEDULE_new
 	for _, schedule := range schedules {
-		if schedule.Key != quary {
+		if schedule.Key != query {
 			continue
 		}
 
-		var checklistJSON map[string]bool // Change here
+		var checklistJSON map[string]bool
 		checklist_unmarshal := json.Unmarshal([]byte(schedule.ChecklistJSON), &checklistJSON)
 
 		fmt.Println("checklist_marshal: ", checklist_unmarshal)
@@ -145,13 +145,15 @@ func SendWebsocket(c *gin.Context) {
 		return
 	}
 
-	code := c.Param("code")
+	code := c.Query("code")
+	fmt.Println("CODE: ", code)
 
 	data_marshal, err := json.Marshal(GetData(code))
 	if err != nil {
 		fmt.Println("Error marshaling to JSON:", err)
 		return
 	}
+
 	err = conn.WriteMessage(websocket.TextMessage, data_marshal)
 	if err != nil {
 		fmt.Println("Error sending message:", err)
